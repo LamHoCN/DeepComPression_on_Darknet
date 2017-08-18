@@ -15,17 +15,17 @@ extern "C" {
 
 //#define PRUNE
 #define TBLOCK_SIZE 128
-
+//coded by linhao
 inline int compare(const void*a, const void*b)
 {
     return *(int *)b - *(int *)a;
 }
-
 __global__ void prune_weights_kernel( float* d_weights, const float* __restrict__ d_prune_index, const int N )
 {
     const int tidx = blockIdx.x * blockDim.x + threadIdx.x;
     if( tidx < N  ) d_weights[tidx] *= __ldg(d_prune_index+tidx);
 }
+//
 
 __global__ void binarize_kernel(float *x, int n, float *binary)
 {
